@@ -1,6 +1,6 @@
 package com.calculator.service;
 
-public class CalculatorServiceImpl implements CalculatorService {
+public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 
 	@Override
 	public int add(int operand1, int operand2) {

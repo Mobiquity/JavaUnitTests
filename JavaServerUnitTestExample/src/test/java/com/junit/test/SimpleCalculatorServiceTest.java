@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.calculator.service.CalculatorService;
-import com.calculator.service.CalculatorServiceImpl;
+import com.calculator.service.SimpleCalculatorService;
+import com.calculator.service.SimpleCalculatorServiceImpl;
 
-public class CalculatorServiceTest {
-	private static CalculatorService calculator;
+public class SimpleCalculatorServiceTest {
+	private static SimpleCalculatorService calculator;
 
 	@BeforeClass
 	public static void initCalculator() {
-		calculator = new CalculatorServiceImpl();
+		calculator = new SimpleCalculatorServiceImpl();
 	}
 
 	// @Before

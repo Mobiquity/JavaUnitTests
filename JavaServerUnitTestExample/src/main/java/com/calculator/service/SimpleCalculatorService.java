@@ -1,6 +1,6 @@
 package com.calculator.service;
 
-public interface CalculatorService {
+public interface SimpleCalculatorService {
 	
 	int add(int operand1, int operand2);
 
