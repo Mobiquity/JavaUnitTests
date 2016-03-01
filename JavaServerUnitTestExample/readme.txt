@@ -21,7 +21,7 @@ Changes to be done in pom.xml:
 The dependency for wolfram 1.1 jar is not available openly on maven repository so it is needed to be added manually into system using 
 following steps:
 
-1) Copy the WolframAlpha-1.1.jar present under directory structure 'src/lib/' to a desired path on the system. 
+1) Copy the WolframAlpha-1.1.jar present under directory structure 'lib/' to a desired path on the system. 
 
 2) Inside pom.xml change the system path for wolfram Aplha dependency using the absolute path where the jar is placed. For instance
  presently the path is:
