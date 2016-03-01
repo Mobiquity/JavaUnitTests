@@ -1,4 +1,4 @@
-package com.junit.test;
+package com.calculator.service;
 
 public interface CalculatorService {
 	
