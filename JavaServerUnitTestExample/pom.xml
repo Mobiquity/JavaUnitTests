@@ -30,7 +30,7 @@
 			<artifactId>WolframAlpha</artifactId>
 			<version>${wolfram.alpha.version}</version>
 			<scope>system</scope>
-			<systemPath>/Users/ravinair/wolfram/WolframAlpha-1.1.jar</systemPath>
+			<systemPath>${project.basedir}/lib/WolframAlpha-1.1.jar</systemPath>
 		</dependency>
 
 		<dependency>
