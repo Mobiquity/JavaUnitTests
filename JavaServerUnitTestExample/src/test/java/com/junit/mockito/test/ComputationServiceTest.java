@@ -10,10 +10,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.calculator.component.ComputationEngine;
-import com.calculator.component.exception.ResultNotFoundException;
-import com.calculator.service.ComputationService;
-import com.calculator.service.ComputationServiceImpl;
+import com.computation.rest.engine.ComputationEngine;
+import com.computation.rest.exception.mapper.ResultNotFoundException;
+import com.computation.service.ComputationService;
+import com.computation.service.impl.ComputationServiceImpl;
 
 public class ComputationServiceTest {
 

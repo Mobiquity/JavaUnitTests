@@ -1,4 +1,6 @@
-package com.calculator.service;
+package com.computation.service.impl;
+
+import com.computation.service.SimpleCalculatorService;
 
 public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 

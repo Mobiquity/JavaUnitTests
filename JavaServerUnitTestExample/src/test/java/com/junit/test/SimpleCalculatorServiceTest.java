@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.calculator.service.SimpleCalculatorService;
-import com.calculator.service.SimpleCalculatorServiceImpl;
+import com.computation.service.SimpleCalculatorService;
+import com.computation.service.impl.SimpleCalculatorServiceImpl;
 
 public class SimpleCalculatorServiceTest {
 	private static SimpleCalculatorService calculator;

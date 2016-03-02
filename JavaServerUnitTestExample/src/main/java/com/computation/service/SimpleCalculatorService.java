@@ -1,4 +1,4 @@
-package com.calculator.service;
+package com.computation.service;
 
 public interface SimpleCalculatorService {
 	

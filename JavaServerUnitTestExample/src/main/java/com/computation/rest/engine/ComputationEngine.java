@@ -1,9 +1,9 @@
-package com.calculator.component;
+package com.computation.rest.engine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.calculator.component.exception.ResultNotFoundException;
+import com.computation.rest.exception.mapper.ResultNotFoundException;
 import com.wolfram.alpha.WAEngine;
 import com.wolfram.alpha.WAException;
 import com.wolfram.alpha.WAPlainText;
@@ -58,6 +58,6 @@ public class ComputationEngine {
         } catch (WAException e) {
             LOG.info("Exception occured in computeOperation() method " + e);
         }
-        throw new ResultNotFoundException("No result was found.");
+        throw new ResultNotFoundException("No result was found for input: " + input);
     }
 }

@@ -1,6 +1,7 @@
-package com.calculator.service;
+package com.computation.service.impl;
 
-import com.calculator.component.ComputationEngine;
+import com.computation.rest.engine.ComputationEngine;
+import com.computation.service.ComputationService;
 
 public class ComputationServiceImpl implements ComputationService {
 
