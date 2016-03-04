@@ -1,4 +1,4 @@
-package com.computation.service;
+package com.computation.rest.service;
 
 public interface ComputationService {
 	

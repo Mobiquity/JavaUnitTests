@@ -1,7 +1,8 @@
 package com.computation.rest.engine;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.computation.rest.exception.mapper.ResultNotFoundException;
 import com.wolfram.alpha.WAEngine;
@@ -12,6 +13,7 @@ import com.wolfram.alpha.WAQuery;
 import com.wolfram.alpha.WAQueryResult;
 import com.wolfram.alpha.WASubpod;
 
+
 public class ComputationEngine {
 
     private WAEngine engine;
@@ -20,7 +22,7 @@ public class ComputationEngine {
 
     private static final String RESULT_STRING = "Result";
 
-    private static final Log LOG = LogFactory.getLog(ComputationEngine.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ComputationEngine.class);
 
     public ComputationEngine(String appId, String format) {
         engine = new WAEngine();

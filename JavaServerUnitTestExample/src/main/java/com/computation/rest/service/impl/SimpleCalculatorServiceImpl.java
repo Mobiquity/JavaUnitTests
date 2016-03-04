@@ -1,7 +1,10 @@
-package com.computation.service.impl;
+package com.computation.rest.service.impl;
 
-import com.computation.service.SimpleCalculatorService;
+import org.springframework.stereotype.Service;
 
+import com.computation.rest.service.SimpleCalculatorService;
+
+@Service
 public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 
 	@Override

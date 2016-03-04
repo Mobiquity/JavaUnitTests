@@ -7,17 +7,19 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.computation.rest.engine.ComputationEngine;
-import com.computation.rest.wrapper.ResultWrapper;
-import com.computation.service.ComputationService;
-import com.computation.service.impl.ComputationServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Path("/query")
+import com.computation.rest.service.ComputationService;
+import com.computation.rest.wrapper.ResultWrapper;
+
+@Path("/calculator")
 public class ComputationController {
 
-	ComputationEngine computationEngine = new ComputationEngine("Q6VYUE-95GGAX4U8Q", "plaintext");
+//	@Autowired
+//	private ComputationEngine computationEngine; // = new ComputationEngine("Q6VYUE-95GGAX4U8Q", "plaintext");
 
-	ComputationService computationService = new ComputationServiceImpl(computationEngine);
+	@Autowired
+	private ComputationService computationService; // = new ComputationServiceImpl(computationEngine);
 
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
@@ -27,4 +29,7 @@ public class ComputationController {
 		resultWrapper.setResult(result);
 		return Response.status(200).entity(resultWrapper).build();
 	}
+	
+	
+	
 }

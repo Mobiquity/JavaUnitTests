@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import com.computation.rest.engine.ComputationEngine;
 import com.computation.rest.exception.mapper.ResultNotFoundException;
-import com.computation.service.ComputationService;
-import com.computation.service.impl.ComputationServiceImpl;
+import com.computation.rest.service.ComputationService;
+import com.computation.rest.service.impl.ComputationServiceImpl;
 
 public class ComputationServiceTest {
 
@@ -21,10 +21,9 @@ public class ComputationServiceTest {
 
     @BeforeClass
     public static void setupMocks() {
-        // computationEngine = new ComputationEngine("Q6VYUE-95GGAX4U8Q", "plaintext");
         computationEngine = mock(ComputationEngine.class);
         setupMockMethods();
-        computationService = new ComputationServiceImpl(computationEngine);
+        computationService = new ComputationServiceImpl();
     }
 
     @Test

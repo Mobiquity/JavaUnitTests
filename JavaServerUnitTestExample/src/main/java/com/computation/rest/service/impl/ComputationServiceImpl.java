@@ -1,15 +1,16 @@
-package com.computation.service.impl;
+package com.computation.rest.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.computation.rest.engine.ComputationEngine;
-import com.computation.service.ComputationService;
+import com.computation.rest.service.ComputationService;
 
+@Service
 public class ComputationServiceImpl implements ComputationService {
 
+	@Autowired
 	private ComputationEngine computationEngine;
-	
-	public ComputationServiceImpl(ComputationEngine computationEngine) {
-		this.computationEngine = computationEngine;
-	}
 	
 	@Override
 	public String basicAirthmeticOperation(String experssion) {
