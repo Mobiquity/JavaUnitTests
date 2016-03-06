@@ -9,9 +9,15 @@ import com.computation.rest.service.ComputationService;
 @Service
 public class ComputationServiceImpl implements ComputationService {
 
+	private static final String TO_BINARY = " to binary";
+	
 	@Autowired
 	private ComputationEngine computationEngine;
-	
+
+	public void setComputationEngine(ComputationEngine computationEngine) {
+		this.computationEngine = computationEngine;
+	}
+
 	@Override
 	public String basicAirthmeticOperation(String experssion) {
 		return computationEngine.computeOperation(experssion);
@@ -19,7 +25,7 @@ public class ComputationServiceImpl implements ComputationService {
 
 	@Override
 	public String convertDecimalToBinary(String experssion) {
-		return computationEngine.computeOperation(experssion);
+		return computationEngine.computeOperation(experssion + TO_BINARY);
 	}
 
 	@Override

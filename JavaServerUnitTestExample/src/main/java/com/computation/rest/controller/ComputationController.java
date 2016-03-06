@@ -8,11 +8,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.computation.rest.service.ComputationService;
 import com.computation.rest.wrapper.ResultWrapper;
 
-@Path("/calculator")
+@Path("/")
+@Component("computationController")
 public class ComputationController {
 
 //	@Autowired
@@ -23,13 +25,35 @@ public class ComputationController {
 
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
-	public Response evaluateExpression( @QueryParam("input") String input) {
+	@Path("arithmetic")
+	public Response evaluateArithmeticExpression( @QueryParam("input") String input) {
 		String result = computationService.basicAirthmeticOperation(input);
 		ResultWrapper resultWrapper = new ResultWrapper();
 		resultWrapper.setResult(result);
 		return Response.status(200).entity(resultWrapper).build();
 	}
+
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("tobinary")
+	public Response convertDecimalToBinary( @QueryParam("input") String input) {
+		String result = computationService.convertDecimalToBinary(input);
+		ResultWrapper resultWrapper = new ResultWrapper();
+		resultWrapper.setResult(result);
+		return Response.status(200).entity(resultWrapper).build();
+	}
+
 	
-	
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("convertmeasure")
+	//10 miles + 14 kilometers
+	public Response convertUnitAndMeasure( @QueryParam("input") String input) {
+		String result = computationService.convertUnitAndMeasure(input);
+		ResultWrapper resultWrapper = new ResultWrapper();
+		resultWrapper.setResult(result);
+		return Response.status(200).entity(resultWrapper).build();
+	}
+
 	
 }
