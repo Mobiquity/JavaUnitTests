@@ -11,36 +11,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.computation.rest.service.ComputationService;
+import com.computation.rest.validator.InputValidator;
 import com.computation.rest.wrapper.ResultWrapper;
 
 @Path("/")
 @Component("computationController")
 public class ComputationController {
 
-//	@Autowired
-//	private ComputationEngine computationEngine; // = new ComputationEngine("Q6VYUE-95GGAX4U8Q", "plaintext");
-
+	private static final int VALIDATION_FAILURE = 401;
+	
+	private static final int SUCCESS_CODE = 200;
+	
 	@Autowired
-	private ComputationService computationService; // = new ComputationServiceImpl(computationEngine);
+	private ComputationService computationService;
 
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("arithmetic")
 	public Response evaluateArithmeticExpression( @QueryParam("input") String input) {
 		String result = computationService.basicAirthmeticOperation(input);
-		ResultWrapper resultWrapper = new ResultWrapper();
-		resultWrapper.setResult(result);
-		return Response.status(200).entity(resultWrapper).build();
+		return createResponse(200, result);
 	}
 
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("tobinary")
 	public Response convertDecimalToBinary( @QueryParam("input") String input) {
-		String result = computationService.convertDecimalToBinary(input);
-		ResultWrapper resultWrapper = new ResultWrapper();
-		resultWrapper.setResult(result);
-		return Response.status(200).entity(resultWrapper).build();
+		if(InputValidator.validValueForBinaryConversion(input)) {
+			String result = computationService.convertDecimalToBinary(input);
+			return createResponse(SUCCESS_CODE, result);
+		}
+		
+		return createResponse(VALIDATION_FAILURE, "Invlaid input data or format.");
 	}
 
 	
@@ -50,10 +52,13 @@ public class ComputationController {
 	//10 miles + 14 kilometers
 	public Response convertUnitAndMeasure( @QueryParam("input") String input) {
 		String result = computationService.convertUnitAndMeasure(input);
-		ResultWrapper resultWrapper = new ResultWrapper();
-		resultWrapper.setResult(result);
-		return Response.status(200).entity(resultWrapper).build();
+		return createResponse(200, result);
 	}
 
+	private Response createResponse(int statusCode, String message) {
+		ResultWrapper resultWrapper = new ResultWrapper();
+		resultWrapper.setResult(message);
+		return Response.status(statusCode).entity(resultWrapper).build();
+	}
 	
 }

@@ -2,13 +2,15 @@ package com.computation.rest.validator;
 
 public class InputValidator {
 
+	private static final String INTEGER_REGEX = "^\\d+$";
+
 	public static boolean validValueForBinaryConversion(String input) {
-		//TODO: enter validation for valid number value.
-		try{
-			int val = Integer.parseInt(input);
-		}catch(Exception exc) {
-			return false;
-		}
-		return true;
+		try {
+			if (input != null && input.matches(INTEGER_REGEX)) {
+				return true;
+			}
+		} catch (Exception exc) {  }
+		return false;
 	}
+
 }
