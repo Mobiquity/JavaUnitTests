@@ -30,7 +30,7 @@ public class ComputationController {
 	@Path("arithmetic")
 	public Response evaluateArithmeticExpression( @QueryParam("input") String input) {
 		String result = computationService.basicAirthmeticOperation(input);
-		return createResponse(200, result);
+		return createResponse(SUCCESS_CODE, result);
 	}
 
 	@GET
@@ -52,7 +52,7 @@ public class ComputationController {
 	//10 miles + 14 kilometers
 	public Response convertUnitAndMeasure( @QueryParam("input") String input) {
 		String result = computationService.convertUnitAndMeasure(input);
-		return createResponse(200, result);
+		return createResponse(SUCCESS_CODE, result);
 	}
 
 	private Response createResponse(int statusCode, String message) {
@@ -60,5 +60,10 @@ public class ComputationController {
 		resultWrapper.setResult(message);
 		return Response.status(statusCode).entity(resultWrapper).build();
 	}
-	
+
+	@GET
+	@Produces(value = MediaType.TEXT_HTML)
+	public Response getDefaultPage(){
+		return Response.status(SUCCESS_CODE).entity("<h1>Hello Test page</h1>").build();
+	}
 }
