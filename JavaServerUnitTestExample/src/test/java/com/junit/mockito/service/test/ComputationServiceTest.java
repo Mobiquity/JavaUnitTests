@@ -1,4 +1,4 @@
-package com.junit.mockito.test;
+package com.junit.mockito.service.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
