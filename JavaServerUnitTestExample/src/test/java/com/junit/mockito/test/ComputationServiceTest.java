@@ -97,6 +97,7 @@ public class ComputationServiceTest {
     @Test
     public void testConvertDecimalToBinary() {
         assertEquals(computationService.convertDecimalToBinary("219"), "11011011_2");
+        assertEquals(computationService.convertDecimalToBinary("-219"), "-11011011_2");
         assertEquals(computationService.convertDecimalToBinary("4242"), "1000010010010_2");
     }
 
@@ -135,6 +136,7 @@ public class ComputationServiceTest {
 
         when(computationEngine.computeOperation("219 to binary")).thenReturn("11011011_2");
         when(computationEngine.computeOperation("4242 to binary")).thenReturn("1000010010010_2");
+        when(computationEngine.computeOperation("-219 to binary")).thenReturn("-11011011_2");
 
         when(computationEngine.computeOperation("120 kilometers to meters")).thenReturn("120000 meters");
         when(computationEngine.computeOperation("160 kilometers to miles")).thenReturn("99.42 miles");
