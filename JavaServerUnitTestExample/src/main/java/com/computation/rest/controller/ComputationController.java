@@ -64,6 +64,6 @@ public class ComputationController {
 	@GET
 	@Produces(value = MediaType.TEXT_HTML)
 	public Response getDefaultPage(){
-		return Response.status(SUCCESS_CODE).entity("<h1>Hello Test page</h1>").build();
+		return Response.status(SUCCESS_CODE).entity("<h1>Test case demo...</h1>").build();
 	}
 }
