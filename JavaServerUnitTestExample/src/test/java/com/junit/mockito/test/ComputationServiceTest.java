@@ -16,9 +16,11 @@ import com.computation.rest.service.impl.ComputationServiceImpl;
 
 public class ComputationServiceTest {
 
-    @InjectMocks private static ComputationService computationService = new ComputationServiceImpl();
+    @InjectMocks 
+    private static ComputationService computationService = new ComputationServiceImpl();
 
-    @Mock private static ComputationEngine computationEngine;
+    @Mock 
+    private static ComputationEngine computationEngine;
 
     @Before
     public void initMocks() {
@@ -28,11 +30,70 @@ public class ComputationServiceTest {
 
     @Test
     public void testBasicAirthmeticOperation() {
-        when(computationEngine.computeOperation("2*2")).thenReturn("4");
         assertEquals(computationService.basicAirthmeticOperation("2*2"), "4");
         assertEquals(computationService.basicAirthmeticOperation("2+22"), "24");
     }
 
+    @Test
+    public void testAddOperation() {
+        assertEquals(computationService.basicAirthmeticOperation("2+22"), "24");
+    }
+
+    @Test
+    public void testAddPositiveNumberToGreaterNegativeNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("-22 + 2"), "-20");
+    }
+
+    @Test
+    public void testAddPositiveNumberToSmallerNegativeNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("-2 + 22"), "20");
+    }
+
+    @Test
+    public void testAddZeroToNegativeNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("-22 + 0"), "-22");
+    }
+
+    @Test
+    public void testAddZeroToPositiveNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("22 + 0"), "22");
+    }
+    
+    @Test
+    public void testSubstractFromGreaterNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("22 - 2"), "20");
+    }
+    
+    @Test
+    public void testSubstractNegativeNumberFromPositiveNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("22 - (-2)"), "24");
+    }
+    
+    @Test
+    public void testSubstractZeroFromPositiveNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("22 - 0"), "22");
+    }
+    
+    @Test
+    public void testSubstractPositiveNumberFromZero() {
+        assertEquals(computationService.basicAirthmeticOperation("0 - 22"), "-22");
+    }
+    
+    @Test
+    public void testMultiplyWithTwoNegativeNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("-2*-2"), "4");
+    }
+    
+    @Test
+    public void testMultiplyNegativeAndPositiveNumber() {
+        assertEquals(computationService.basicAirthmeticOperation("-2*2"), "-4");
+    }
+    
+    @Test
+    public void testMultiplyWithZero() {
+        assertEquals(computationService.basicAirthmeticOperation("2*0"), "0");
+    }
+    
     @Test
     public void testConvertDecimalToBinary() {
         assertEquals(computationService.convertDecimalToBinary("219"), "11011011_2");
@@ -56,8 +117,21 @@ public class ComputationServiceTest {
     }
 
     private static void setupMockMethods() {
-        when(computationEngine.computeOperation("2*2")).thenReturn("4");
         when(computationEngine.computeOperation("2+22")).thenReturn("24");
+        when(computationEngine.computeOperation("-22 + 2")).thenReturn("-20");
+        when(computationEngine.computeOperation("-2 + 22")).thenReturn("20");
+        when(computationEngine.computeOperation("-22 + 0")).thenReturn("-22");
+        when(computationEngine.computeOperation("22 + 0")).thenReturn("22");
+        
+        when(computationEngine.computeOperation("22 - 2")).thenReturn("20");
+        when(computationEngine.computeOperation("22 - (-2)")).thenReturn("24");
+        when(computationEngine.computeOperation("22 - 0")).thenReturn("22");
+        when(computationEngine.computeOperation("0 - 22")).thenReturn("-22");
+        
+        when(computationEngine.computeOperation("2*2")).thenReturn("4");
+        when(computationEngine.computeOperation("-2*-2")).thenReturn("4");
+        when(computationEngine.computeOperation("-2*2")).thenReturn("-4");
+        when(computationEngine.computeOperation("2*0")).thenReturn("0");
 
         when(computationEngine.computeOperation("219 to binary")).thenReturn("11011011_2");
         when(computationEngine.computeOperation("4242 to binary")).thenReturn("1000010010010_2");
