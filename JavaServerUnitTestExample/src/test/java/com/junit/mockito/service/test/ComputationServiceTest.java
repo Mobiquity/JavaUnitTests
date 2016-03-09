@@ -43,8 +43,11 @@ public class ComputationServiceTest {
         computationService = new ComputationServiceImpl(computationEngine);
     }
 
+    /**
+     * Test basic arithmetic operation for multiplication and addition.
+     */
     @Test
-    public void testBasicAirthmeticOperation() {
+    public void testBasicArithmeticOperation() {
     	when(computationEngine.computeOperation("2+22")).thenReturn("24");
     	when(computationEngine.computeOperation("2*2")).thenReturn("4");
     	
@@ -52,78 +55,118 @@ public class ComputationServiceTest {
         assertEquals(computationService.basicAirthmeticOperation("2+22"), "24");
     }
 
+    /**
+     * Test add operation for two positive values.
+     */
     @Test
     public void testAddOperation() {
     	when(computationEngine.computeOperation("2+22")).thenReturn("24");
         assertEquals(computationService.basicAirthmeticOperation("2+22"), "24");
     }
 
+    /**
+     * Test add operation for one negative number and positive number.
+     * The negative number is greater and positive number value. 
+     */
     @Test
     public void testAddPositiveNumberToGreaterNegativeNumber() {
     	when(computationEngine.computeOperation("-22 + 2")).thenReturn("-20");
         assertEquals(computationService.basicAirthmeticOperation("-22 + 2"), "-20");
     }
 
+    /**
+     * Test add operation for greater positive number and negative number.
+     */
     @Test
     public void testAddPositiveNumberToSmallerNegativeNumber() {
     	when(computationEngine.computeOperation("-2 + 22")).thenReturn("20");
         assertEquals(computationService.basicAirthmeticOperation("-2 + 22"), "20");
     }
 
+    /**
+     *  Test add operation to add a zero value to negative number.
+     */
     @Test
     public void testAddZeroToNegativeNumber() {
     	when(computationEngine.computeOperation("-22 + 0")).thenReturn("-22");
         assertEquals(computationService.basicAirthmeticOperation("-22 + 0"), "-22");
     }
 
+    /**
+     * Test add operation to add a zero value to positive number.
+     */
     @Test
     public void testAddZeroToPositiveNumber() {
     	when(computationEngine.computeOperation("22 + 0")).thenReturn("22");
         assertEquals(computationService.basicAirthmeticOperation("22 + 0"), "22");
     }
     
+    /**
+     *  Test subtract smaller number from greater number. 
+     */
     @Test
     public void testSubstractFromGreaterNumber() {
     	when(computationEngine.computeOperation("22 - 2")).thenReturn("20");
         assertEquals(computationService.basicAirthmeticOperation("22 - 2"), "20");
     }
     
+    /**
+     *  Test subtract smaller number from greater number. 
+     */
     @Test
     public void testSubstractNegativeNumberFromPositiveNumber() {
     	when(computationEngine.computeOperation("22 - (-2)")).thenReturn("24");
         assertEquals(computationService.basicAirthmeticOperation("22 - (-2)"), "24");
     }
     
+    /**
+     *  Test subtract zero from positive number. 
+     */
     @Test
     public void testSubstractZeroFromPositiveNumber() {
     	when(computationEngine.computeOperation("22 - 0")).thenReturn("22");
         assertEquals(computationService.basicAirthmeticOperation("22 - 0"), "22");
     }
     
+    /**
+     *  Test subtract negative number from zero. 
+     */
     @Test
     public void testSubstractPositiveNumberFromZero() {
     	when(computationEngine.computeOperation("0 - 22")).thenReturn("-22");
         assertEquals(computationService.basicAirthmeticOperation("0 - 22"), "-22");
     }
     
-    @Test
+    /**
+     *  Test multiply two negative numbers 
+     */
+   @Test
     public void testMultiplyWithTwoNegativeNumber() {
     	when(computationEngine.computeOperation("-2*-2")).thenReturn("4");
         assertEquals(computationService.basicAirthmeticOperation("-2*-2"), "4");
     }
     
-    @Test
+   /**
+    *  Test multiply negative number and positive number 
+    */
+   @Test
     public void testMultiplyNegativeAndPositiveNumber() {
     	when(computationEngine.computeOperation("-2*2")).thenReturn("-4");
         assertEquals(computationService.basicAirthmeticOperation("-2*2"), "-4");
     }
     
+   /**
+    *  Test multiply positive number with zero 
+    */
     @Test
     public void testMultiplyWithZero() {
     	when(computationEngine.computeOperation("2*0")).thenReturn("0");
         assertEquals(computationService.basicAirthmeticOperation("2*0"), "0");
     }
     
+    /**
+     * Test converting numeric value to binary.
+     */
     @Test
     public void testConvertDecimalToBinary() {
     	when(computationEngine.computeOperation("219 to binary")).thenReturn("11011011_2");
@@ -135,6 +178,9 @@ public class ComputationServiceTest {
         assertEquals(computationService.convertDecimalToBinary("4242"), "1000010010010_2");
     }
 
+    /**
+     * Test converting unit to another compatible unit type.
+     */
     @Test
     public void testConvertUnitAndMeasure() {
         when(computationEngine.computeOperation("120 kilometers to meters")).thenReturn("120000 meters");
@@ -144,12 +190,18 @@ public class ComputationServiceTest {
         assertEquals(computationService.convertUnitAndMeasure("160 kilometers to miles"), "99.42 miles");
     }
 
+    /**
+     * Test exception condition when passing invalid data type value. 
+     */
     @Test(expected = ResultNotFoundException.class)
     public void testResultNotFoundException() {
     	when(computationEngine.computeOperation("!@#$%^&*()!@#$%^&*()!@#$%^&*(")).thenThrow(new ResultNotFoundException("No result found for given query"));
         computationService.basicAirthmeticOperation("!@#$%^&*()!@#$%^&*()!@#$%^&*(");
     }
 
+    /**
+     * Test to convert incompatible unit type.
+     */
     @Test
     public void testIncompatibleConversion() {
     	when(computationEngine.computeOperation("convert 1024 megabytes to miles")).thenReturn(" MB  (megabytes) and  miles are not compatible.");

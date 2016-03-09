@@ -25,6 +25,11 @@ public class ComputationController {
 	@Autowired
 	private ComputationService computationService;
 
+	/**
+	 * This rest method perform arithmetic operation like addition, subtraction, multiplication and division. 
+	 * @param input
+	 * @return
+	 */
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("arithmetic")
@@ -33,6 +38,11 @@ public class ComputationController {
 		return createResponse(SUCCESS_CODE, result);
 	}
 
+	/**
+	 * This rest method convert numeric value into binary equivalent representation. It also validate the input data value passed.
+	 * @param input
+	 * @return
+	 */
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("tobinary")
@@ -45,6 +55,11 @@ public class ComputationController {
 		return createResponse(VALIDATION_FAILURE, "Invlaid input data or format.");
 	}
 	
+	/**
+	 * This rest method convert unit to another compaitable unit type.
+	 * @param input
+	 * @return
+	 */
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("convertmeasure")
@@ -54,12 +69,23 @@ public class ComputationController {
 		return createResponse(SUCCESS_CODE, result);
 	}
 
+	/**
+	 * A default GET method to check that server is up and REST service is working.
+	 * @return
+	 */
 	@GET
 	@Produces(value = MediaType.TEXT_HTML)
 	public Response getDefaultPage(){
 		return Response.status(SUCCESS_CODE).entity("<h1>Test case demo...</h1>").build();
 	}
 	
+	/**
+	 * A method to create response object.
+	 * 
+	 * @param statusCode
+	 * @param message
+	 * @return
+	 */
 	private Response createResponse(int statusCode, String message) {
 		ResultWrapper resultWrapper = new ResultWrapper();
 		resultWrapper.setResult(message);
