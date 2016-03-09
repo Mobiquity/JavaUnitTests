@@ -44,7 +44,6 @@ public class ComputationController {
 		
 		return createResponse(VALIDATION_FAILURE, "Invlaid input data or format.");
 	}
-
 	
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
@@ -55,15 +54,16 @@ public class ComputationController {
 		return createResponse(SUCCESS_CODE, result);
 	}
 
+	@GET
+	@Produces(value = MediaType.TEXT_HTML)
+	public Response getDefaultPage(){
+		return Response.status(SUCCESS_CODE).entity("<h1>Test case demo...</h1>").build();
+	}
+	
 	private Response createResponse(int statusCode, String message) {
 		ResultWrapper resultWrapper = new ResultWrapper();
 		resultWrapper.setResult(message);
 		return Response.status(statusCode).entity(resultWrapper).build();
 	}
 
-	@GET
-	@Produces(value = MediaType.TEXT_HTML)
-	public Response getDefaultPage(){
-		return Response.status(SUCCESS_CODE).entity("<h1>Test case demo...</h1>").build();
-	}
 }

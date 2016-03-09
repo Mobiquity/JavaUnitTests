@@ -11,10 +11,10 @@ public class ComputationServiceImpl implements ComputationService {
 
 	private static final String TO_BINARY = " to binary";
 	
-	@Autowired
 	private ComputationEngine computationEngine;
-
-	public void setComputationEngine(ComputationEngine computationEngine) {
+	
+	@Autowired
+	public ComputationServiceImpl(ComputationEngine computationEngine) {
 		this.computationEngine = computationEngine;
 	}
 
