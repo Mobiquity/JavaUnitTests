@@ -181,8 +181,8 @@ public class ComputationServiceTest {
      */
     @Test
     public void testConvertUnitAndMeasure() {
-        when(computationEngine.computeOperation("120 kilometers to meters")).thenReturn("120000 meters");
-        when(computationEngine.computeOperation("160 kilometers to miles")).thenReturn("99.42 miles");
+        when(computationEngine.computeUnitConversion("120 kilometers to meters")).thenReturn("120000 meters");
+        when(computationEngine.computeUnitConversion("160 kilometers to miles")).thenReturn("99.42 miles");
         
         assertEquals(computationService.convertUnitAndMeasure("120 kilometers to meters"), "120000 meters");
         assertEquals(computationService.convertUnitAndMeasure("160 kilometers to miles"), "99.42 miles");
@@ -202,7 +202,7 @@ public class ComputationServiceTest {
      */
     @Test
     public void testIncompatibleConversion() {
-    	when(computationEngine.computeOperation("convert 1024 megabytes to miles")).thenReturn(" MB  (megabytes) and  miles are not compatible.");
+    	when(computationEngine.computeUnitConversion("convert 1024 megabytes to miles")).thenReturn(" MB  (megabytes) and  miles are not compatible.");
         assertEquals(computationService.convertUnitAndMeasure("convert 1024 megabytes to miles"), " MB  (megabytes) and  miles are not compatible.");
     }
 

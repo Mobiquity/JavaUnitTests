@@ -30,6 +30,6 @@ public class ComputationServiceImpl implements ComputationService {
 
 	@Override
 	public String convertUnitAndMeasure(String experssion) {
-		return computationEngine.computeOperation(experssion);
+		return computationEngine.computeUnitConversion(experssion);
 	}
 }

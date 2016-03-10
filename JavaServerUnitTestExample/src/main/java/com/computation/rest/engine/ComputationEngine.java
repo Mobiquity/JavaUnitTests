@@ -21,6 +21,8 @@ public class ComputationEngine {
     private WAQuery query;
 
     private static final String RESULT_STRING = "Result";
+    
+    private static final String UNIT_CONVERSION_TOTAL = "Total";
 
     private static final Logger LOG = LoggerFactory.getLogger(ComputationEngine.class);
 
@@ -55,6 +57,48 @@ public class ComputationEngine {
                             }
                         }
                     }
+                }
+            }
+        } catch (WAException e) {
+            LOG.info("Exception occured in computeOperation() method " + e);
+        }
+        throw new ResultNotFoundException("No result was found for input: " + input);
+    }
+    
+    public String computeUnitConversion(String input) {
+        query = getQuery(input);
+        try {
+            WAQueryResult queryResult = engine.performQuery(query);
+
+            if (queryResult.isError()) {
+                throw new ResultNotFoundException(queryResult.getErrorMessage());
+            } else if (!queryResult.isSuccess()) {
+            } else {
+            	StringBuilder output = new StringBuilder();
+            	
+                for (WAPod pod : queryResult.getPods()) {
+                    if (!pod.isError() && UNIT_CONVERSION_TOTAL.equals(pod.getTitle())) {
+                        for (WASubpod subpod : pod.getSubpods()) {
+                            for (Object element : subpod.getContents()) {
+                                if (element instanceof WAPlainText) {
+                                    output.append(((WAPlainText) element).getText()).append(", ");
+                                }
+                            }
+                        }
+                    }
+                    else if (!pod.isError() && RESULT_STRING.equals(pod.getTitle())) {
+                        for (WASubpod subpod : pod.getSubpods()) {
+                            for (Object element : subpod.getContents()) {
+                                if (element instanceof WAPlainText) {
+                                    return ((WAPlainText) element).getText();
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if(output.length() > 2) {
+                	return output.substring(0, output.length()-2);
                 }
             }
         } catch (WAException e) {
