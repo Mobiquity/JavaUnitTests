@@ -10,7 +10,9 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.computation.rest.constants.MessageConstants;
 import com.computation.rest.service.ComputationService;
+import com.computation.rest.service.SimpleCalculatorService;
 import com.computation.rest.validator.InputValidator;
 import com.computation.rest.wrapper.ResultWrapper;
 
@@ -24,6 +26,9 @@ public class ComputationController {
 	
 	@Autowired
 	private ComputationService computationService;
+	
+	@Autowired
+	private SimpleCalculatorService simpleCalculatorService;
 
 	/**
 	 * This rest method perform arithmetic operation like addition, subtraction, multiplication and division. 
@@ -70,6 +75,78 @@ public class ComputationController {
 	}
 
 	/**
+	 * This rest method convert unit to another compaitable unit type.
+	 * @param input
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("addition")
+	public Response addNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
+		Response response = validateOperand(operand1, operand2);
+		if(response == null) {
+			int result = simpleCalculatorService.add(Integer.parseInt(operand1), Integer.parseInt(operand2));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.ADDITION_RESULT, operand1, operand2, result));
+		}
+		
+		return response;
+	}
+
+	/**
+	 * This rest method convert unit to another compaitable unit type.
+	 * @param input
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("subtract")
+	public Response subtractNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
+		Response response = validateOperand(operand1, operand2);
+		if(response == null) {
+			int result = simpleCalculatorService.subtract(Integer.parseInt(operand1), Integer.parseInt(operand2));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.SUBTRACTION_RESULT, operand1, operand2, result));
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * This rest method convert unit to another compaitable unit type.
+	 * @param input
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("multiply")
+	public Response multiplyNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
+		Response response = validateOperand(operand1, operand2);
+		if(response == null) {
+			int result = simpleCalculatorService.multiply(Integer.parseInt(operand1), Integer.parseInt(operand2));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.MULTIPLY_RESULT, operand1, operand2, result));
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * This rest method convert unit to another compaitable unit type.
+	 * @param input
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("division")
+	public Response divisionNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
+		Response response = validateOperand(operand1, operand2);
+		if(response == null) {
+			int result = simpleCalculatorService.divison(Integer.parseInt(operand1), Integer.parseInt(operand2));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.DIVISION_RESULT, operand1, operand2, result));
+		}
+		
+		return response;
+	}
+	
+	/**
 	 * A default GET method to check that server is up and REST service is working.
 	 * @return
 	 */
@@ -90,6 +167,18 @@ public class ComputationController {
 		ResultWrapper resultWrapper = new ResultWrapper();
 		resultWrapper.setResult(message);
 		return Response.status(statusCode).entity(resultWrapper).build();
+	}
+	
+	private Response validateOperand(String operand1, String operand2) {
+		if(!InputValidator.validIntegerValue(operand1)) {
+			return createResponse(VALIDATION_FAILURE, "Operand1 is missing or invlaid integer value.");
+		}
+		
+		if(!InputValidator.validIntegerValue(operand2)) {
+			return createResponse(VALIDATION_FAILURE, "Operand2 is missing or invlaid integer value.");
+		}
+		
+		return null;
 	}
 
 }

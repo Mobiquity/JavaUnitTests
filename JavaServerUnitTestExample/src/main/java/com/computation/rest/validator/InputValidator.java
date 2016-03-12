@@ -6,11 +6,21 @@ public class InputValidator {
 
 	public static boolean validValueForBinaryConversion(String input) {
 		try {
-			if (input != null && input.matches(INTEGER_REGEX)) {
+			if (input != null && input.length() > 0  && input.matches(INTEGER_REGEX)) {
 				return true;
 			}
-		} catch (Exception exc) {  }
+		} catch (Exception exc) {
+		}
 		return false;
 	}
 
+	public static boolean validIntegerValue(String input) {
+		try {
+			if (input != null && input.length() > 0 && input.matches(INTEGER_REGEX)) {
+				return true;
+			}
+		} catch (Exception exc) {
+		}
+		return false;
+	}
 }
