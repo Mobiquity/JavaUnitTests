@@ -57,7 +57,7 @@ public class ComputationController {
 			return createResponse(SUCCESS_CODE, result);
 		}
 		
-		return createResponse(VALIDATION_FAILURE, "Invlaid input data or format.");
+		return createResponse(VALIDATION_FAILURE, "Invalid input data or format.");
 	}
 	
 	/**
