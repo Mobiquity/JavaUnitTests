@@ -59,8 +59,8 @@ public class ComputationEngine {
                     }
                 }
             }
-        } catch (WAException e) {
-            LOG.info("Exception occured in computeOperation() method " + e);
+        } catch (WAException exc) {
+            LOG.info("Exception occured in computeOperation() method ", exc);
         }
         throw new ResultNotFoundException("No result was found for input: " + input);
     }
@@ -101,8 +101,8 @@ public class ComputationEngine {
                 	return output.substring(0, output.length()-2);
                 }
             }
-        } catch (WAException e) {
-            LOG.info("Exception occured in computeOperation() method " + e);
+        } catch (WAException exc) {
+            LOG.info("Exception occured in computeUnitConversion() method ", exc);
         }
         throw new ResultNotFoundException("No result was found for input: " + input);
     }
