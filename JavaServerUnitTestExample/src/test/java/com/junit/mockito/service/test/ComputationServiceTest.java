@@ -205,5 +205,10 @@ public class ComputationServiceTest {
     	when(computationEngine.computeUnitConversion("convert 1024 megabytes to miles")).thenReturn(" MB  (megabytes) and  miles are not compatible.");
         assertEquals(computationService.convertUnitAndMeasure("convert 1024 megabytes to miles"), " MB  (megabytes) and  miles are not compatible.");
     }
+    
+    @Test
+    public void testAverageCalculation() {
+    	
+    }
 
 }

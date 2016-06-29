@@ -32,4 +32,12 @@ public class ComputationServiceImpl implements ComputationService {
 	public String convertUnitAndMeasure(String experssion) {
 		return computationEngine.computeUnitConversion(experssion);
 	}
+	
+	public String average(String type, String valueSet) {
+		return computationEngine.computeOperation(type + " " + valueSet);
+	}
+	
+	public String complexCalculation(String query) {
+		return computationEngine.computeOperation(query);
+	}
 }

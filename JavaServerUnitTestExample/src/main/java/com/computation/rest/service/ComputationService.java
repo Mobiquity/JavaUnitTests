@@ -9,4 +9,7 @@ public interface ComputationService {
 	
 	String convertUnitAndMeasure(String experssion);
 	
+	String average(String type, String valueSet);
+	
+	String complexCalculation(String query);
 }

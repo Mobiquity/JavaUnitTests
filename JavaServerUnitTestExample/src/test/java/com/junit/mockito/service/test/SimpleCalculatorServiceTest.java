@@ -9,6 +9,34 @@ import com.computation.rest.service.SimpleCalculatorService;
 import com.computation.rest.service.impl.SimpleCalculatorServiceImpl;
 
 public class SimpleCalculatorServiceTest {
+
+	private static final float FLOAT_VALUE_0 = 0.0f;
+
+	private static final float FLOAT_VALUE_1 = 1.0f;
+	private static final float NEG_FLOAT_VALUE_1 = -1.0f;
+
+	private static final float FLOAT_VALUE_2 = 2.0f;
+	private static final float NEG_FLOAT_VALUE_2 = -2.0f;
+
+	private static final float FLOAT_VALUE_3 = 3.0f;
+	private static final float FLOAT_VALUE_3_POINT_5 = 3.5f;
+	private static final float NEG_FLOAT_VALUE_3 = -3.0f;
+
+	private static final float FLOAT_VALUE_4 = 4.0f;
+	private static final float NEG_FLOAT_VALUE_4 = -4.0f;
+
+	private static final float FLOAT_VALUE_5 = 5.0f;
+	private static final float NEG_FLOAT_VALUE_5 = -5.0f;
+
+	private static final float FLOAT_VALUE_7 = 7.0f;
+	private static final float NEG_FLOAT_VALUE_7 = -7.0f;
+
+	private static final float FLOAT_VALUE_10 = 10.0f;
+	private static final float NEG_FLOAT_VALUE_10 = -10.0f;
+	
+	private static final float FLOAT_VALUE_12 = 12.0f;
+	private static final float NEG_FLOAT_VALUE_12 = -12.0f;
+	
 	private static SimpleCalculatorService calculator;
 
 	@BeforeClass
@@ -31,8 +59,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddForBothPositiveValues() {
-		int result = calculator.add(3, 4);
-		assertEquals(7, result);
+		float result = calculator.add(FLOAT_VALUE_3, FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_7, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -40,8 +68,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddBothNegativeValues() {
-		int result = calculator.add(-3, -4);
-		assertEquals(-7, result);
+		float result = calculator.add(NEG_FLOAT_VALUE_3, NEG_FLOAT_VALUE_4);
+		assertEquals(NEG_FLOAT_VALUE_7, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -49,8 +77,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddPositiveValueToSmallerNegativeValue() {
-		int result = calculator.add(-3, 4);
-		assertEquals(1, result);
+		float result = calculator.add(NEG_FLOAT_VALUE_3, FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_1, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -59,8 +87,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddPositiveValueToGreaterNegativeValue() {
-		int result = calculator.add(-7, 4);
-		assertEquals(-3, result);
+		float result = calculator.add(NEG_FLOAT_VALUE_7, FLOAT_VALUE_4);
+		assertEquals(NEG_FLOAT_VALUE_3, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -68,8 +96,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddZeroToPostivieValue() {
-		int result = calculator.add(4, 0);
-		assertEquals(4, result);
+		float result = calculator.add(FLOAT_VALUE_4, FLOAT_VALUE_0);
+		assertEquals(FLOAT_VALUE_4, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -77,8 +105,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddZeroToNegativeValue() {
-		int result = calculator.add(-4, 0);
-		assertEquals(-4, result);
+		float result = calculator.add(NEG_FLOAT_VALUE_4, FLOAT_VALUE_0);
+		assertEquals(NEG_FLOAT_VALUE_4, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -87,8 +115,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddGreaterNegativeValueToPositiveValue() {
-		int result = calculator.add(3, -4);
-		assertEquals(-1, result);
+		float result = calculator.add(FLOAT_VALUE_3, NEG_FLOAT_VALUE_4);
+		assertEquals(NEG_FLOAT_VALUE_1, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -97,8 +125,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testAddForSecondSmallerNegativeValue() {
-		int result = calculator.add(7, -4);
-		assertEquals(3, result);
+		float result = calculator.add(FLOAT_VALUE_7, NEG_FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_3, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -107,8 +135,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractSmallerValueFromGreaterValue() {
-		int result = calculator.subtract(5, 3);
-		assertEquals(2, result);
+		float result = calculator.subtract(FLOAT_VALUE_5, FLOAT_VALUE_3);
+		assertEquals(FLOAT_VALUE_2, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -117,8 +145,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractGreaterValueFromSmallerValue() {
-		int result = calculator.subtract(3, 5);
-		assertEquals(-2, result);
+		float result = calculator.subtract(FLOAT_VALUE_3, FLOAT_VALUE_5);
+		assertEquals(NEG_FLOAT_VALUE_2, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -126,8 +154,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractZeroFromPositiveValue() {
-		int result = calculator.subtract(4, 0);
-		assertEquals(4, result);
+		float result = calculator.subtract(FLOAT_VALUE_4, FLOAT_VALUE_0);
+		assertEquals(FLOAT_VALUE_4, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -135,8 +163,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractPositiveValueFromZero() {
-		int result = calculator.subtract(0, 4);
-		assertEquals(-4, result);
+		float result = calculator.subtract(FLOAT_VALUE_0, FLOAT_VALUE_4);
+		assertEquals(NEG_FLOAT_VALUE_4, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -144,8 +172,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractZeroFromNegativeValue() {
-		int result = calculator.subtract(-4, 0);
-		assertEquals(-4, result);
+		float result = calculator.subtract(NEG_FLOAT_VALUE_4, FLOAT_VALUE_0);
+		assertEquals(NEG_FLOAT_VALUE_4, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -153,8 +181,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractNegativeValueFromZero() {
-		int result = calculator.subtract(0, -4);
-		assertEquals(4, result);
+		float result = calculator.subtract(FLOAT_VALUE_0, NEG_FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_4, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -163,8 +191,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractSmallerNegativeValueFromGreaterNegativeValue() {
-		int result = calculator.subtract(-3, -4);
-		assertEquals(1, result);
+		float result = calculator.subtract(NEG_FLOAT_VALUE_3, NEG_FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_1, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -173,8 +201,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractGreaterNegativeValueFromSmallerNegativeValue() {
-		int result = calculator.subtract(-4, -3);
-		assertEquals(-1, result);
+		float result = calculator.subtract(NEG_FLOAT_VALUE_4, NEG_FLOAT_VALUE_3);
+		assertEquals(NEG_FLOAT_VALUE_1, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -183,8 +211,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractPostiveValueFromNegativeValue() {
-		int result = calculator.subtract(-3, 4);
-		assertEquals(-7, result);
+		float result = calculator.subtract(NEG_FLOAT_VALUE_3, FLOAT_VALUE_4);
+		assertEquals(NEG_FLOAT_VALUE_7, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -193,8 +221,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testSubtractNegativeValueFromPositiveValue() {
-		int result = calculator.subtract(3, -4);
-		assertEquals(7, result);
+		float result = calculator.subtract(FLOAT_VALUE_3, NEG_FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_7, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -202,8 +230,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testMultiplyForBothPostiveValue() {
-		int result = calculator.multiply(3, 4);
-		assertEquals(12, result);
+		float result = calculator.multiply(FLOAT_VALUE_3, FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_12, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -211,8 +239,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testMultiplyForBothNegativeValue() {
-		int result = calculator.multiply(-3, -4);
-		assertEquals(12, result);
+		float result = calculator.multiply(NEG_FLOAT_VALUE_3, NEG_FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_12, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -220,8 +248,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testMultiplyForOneNegativeValue() {
-		int result = calculator.multiply(-3, 4);
-		assertEquals(-12, result);
+		float result = calculator.multiply(NEG_FLOAT_VALUE_3, FLOAT_VALUE_4);
+		assertEquals(NEG_FLOAT_VALUE_12, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -229,8 +257,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testMultiplyPositiveValueWithZero() {
-		int result = calculator.multiply(0, 4);
-		assertEquals(0, result);
+		float result = calculator.multiply(FLOAT_VALUE_0, FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_0, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -238,8 +266,8 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test
 	public void testMultiplyNegativeValueWithZero() {
-		int result = calculator.multiply(0, -4);
-		assertEquals(0, result);
+		float result = calculator.multiply(FLOAT_VALUE_0, NEG_FLOAT_VALUE_4);
+		assertEquals(FLOAT_VALUE_0, result, FLOAT_VALUE_0);
 	}
 
 	/**
@@ -248,8 +276,8 @@ public class SimpleCalculatorServiceTest {
 	@Test
 	public void testDivison() {
 		try {
-			int result = calculator.divison(10, 2);
-			assertEquals(5, result);
+			float result = calculator.divison(FLOAT_VALUE_10, FLOAT_VALUE_2);
+			assertEquals(FLOAT_VALUE_5, result, FLOAT_VALUE_0);
 		} catch (Exception exc) {
 			exc.printStackTrace(System.err);
 		}
@@ -261,8 +289,8 @@ public class SimpleCalculatorServiceTest {
 	@Test
 	public void testDivisonForNegativeDividend() {
 		try {
-			int result = calculator.divison(-10, 2);
-			assertEquals(-5, result);
+			float result = calculator.divison(NEG_FLOAT_VALUE_10, FLOAT_VALUE_2);
+			assertEquals(NEG_FLOAT_VALUE_5, result, FLOAT_VALUE_0);
 		} catch (Exception exc) {
 			exc.printStackTrace(System.err);
 		}
@@ -274,8 +302,8 @@ public class SimpleCalculatorServiceTest {
 	@Test
 	public void testDivisonForNegativeDivisor() {
 		try {
-			int result = calculator.divison(10, -2);
-			assertEquals(-5, result);
+			float result = calculator.divison(FLOAT_VALUE_10, NEG_FLOAT_VALUE_2);
+			assertEquals(NEG_FLOAT_VALUE_5, result, FLOAT_VALUE_0);
 		} catch (Exception exc) {
 			exc.printStackTrace(System.err);
 		}
@@ -287,8 +315,8 @@ public class SimpleCalculatorServiceTest {
 	@Test
 	public void testDivisonForPrimeDividend() {
 		try {
-			int result = calculator.divison(7, 2);
-			assertEquals(3, result);
+			float result = calculator.divison(FLOAT_VALUE_7, FLOAT_VALUE_2);
+			assertEquals(FLOAT_VALUE_3_POINT_5, result, FLOAT_VALUE_0);
 		} catch (Exception exc) {
 			exc.printStackTrace(System.err);
 		}
@@ -300,8 +328,8 @@ public class SimpleCalculatorServiceTest {
 	@Test
 	public void testDivisonForZeroDividend() {
 		try {
-			int result = calculator.divison(0, 2);
-			assertEquals(0, result);
+			float result = calculator.divison(FLOAT_VALUE_0, FLOAT_VALUE_2);
+			assertEquals(FLOAT_VALUE_0, result, FLOAT_VALUE_0);
 		} catch (Exception exc) {
 			exc.printStackTrace(System.err);
 		}
@@ -313,13 +341,13 @@ public class SimpleCalculatorServiceTest {
 	 */
 	@Test(expected = ArithmeticException.class)
 	public void testDivisionException() {
-		calculator.divison(10, 0);
+		calculator.divison(FLOAT_VALUE_10, FLOAT_VALUE_0);
 	}
 
 	// @Ignore
 	// @Test
 	// public void testSubtract() {
-	// int result = 10 - 3;
+	// float result = 10 - 3;
 	// assertTrue(result == 9);
 	// }
 

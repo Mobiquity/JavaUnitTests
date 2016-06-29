@@ -8,22 +8,22 @@ import com.computation.rest.service.SimpleCalculatorService;
 public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 
 	@Override
-	public int add(int operand1, int operand2) {
+	public float add(float operand1, float operand2) {
 		return operand1 + operand2;
 	}
 
 	@Override
-	public int subtract(int operand1, int operand2) {
+	public float subtract(float operand1, float operand2) {
 		return operand1 - operand2;
 	}
 
 	@Override
-	public int multiply(int operand1, int operand2) {
+	public float multiply(float operand1, float operand2) {
 		return operand1 * operand2;
 	}
 
 	@Override
-	public int divison(int operand1, int operand2) {
+	public float divison(float operand1, float operand2) {
 		if (operand2 == 0) {
 			throw new ArithmeticException("Divider can't be zero");
 		}

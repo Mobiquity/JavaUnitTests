@@ -61,6 +61,41 @@ public class ComputationController {
 	}
 	
 	/**
+	 * This rest method different type of average supported by wolfram alpha.
+	 * @param input
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("average")
+	public Response average(@QueryParam("type") String type, @QueryParam("set") String valueSet) {
+		Response response = validateAverageParameter(type, valueSet);
+		if(response == null) {
+			String result = computationService.average(type, valueSet);
+			response = createResponse(SUCCESS_CODE, result);
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * This rest method execute complex query supported by wolfram alpha.
+	 * @param input
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("complex-calc")
+	public Response complexCalculation(@QueryParam("query") String query) {
+		if(!InputValidator.isEmptyString(query)) {
+			String result = computationService.complexCalculation(query);
+			return createResponse(SUCCESS_CODE, result);
+		}
+		
+		return createResponse(VALIDATION_FAILURE, "Query type is missing.");
+	}
+	
+	/**
 	 * This rest method convert unit to another compaitable unit type.
 	 * @param input
 	 * @return
@@ -72,8 +107,8 @@ public class ComputationController {
 	public Response convertUnitAndMeasure( @QueryParam("input") String input) {
 		String result = computationService.convertUnitAndMeasure(input);
 		return createResponse(SUCCESS_CODE, result);
-	}
-
+	}	
+	
 	/**
 	 * This rest method convert unit to another compaitable unit type.
 	 * @param input
@@ -81,12 +116,12 @@ public class ComputationController {
 	 */
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
-	@Path("addition")
-	public Response addNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
-		Response response = validateOperand(operand1, operand2);
+	@Path("add")
+	public Response addNumbers(@QueryParam("leftOperand") String leftOperand, @QueryParam("rightOperand") String rightOperand) {
+		Response response = validateOperand(leftOperand, rightOperand);
 		if(response == null) {
-			int result = simpleCalculatorService.add(Integer.parseInt(operand1), Integer.parseInt(operand2));
-			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.ADDITION_RESULT, operand1, operand2, result));
+			float result = simpleCalculatorService.add(Float.parseFloat(leftOperand), Float.parseFloat(rightOperand));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.ADDITION_RESULT, leftOperand, rightOperand, result));
 		}
 		
 		return response;
@@ -100,11 +135,11 @@ public class ComputationController {
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("subtract")
-	public Response subtractNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
-		Response response = validateOperand(operand1, operand2);
+	public Response subtractNumbers(@QueryParam("leftOperand") String leftOperand, @QueryParam("rightOperand") String rightOperand) {
+		Response response = validateOperand(leftOperand, rightOperand);
 		if(response == null) {
-			int result = simpleCalculatorService.subtract(Integer.parseInt(operand1), Integer.parseInt(operand2));
-			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.SUBTRACTION_RESULT, operand1, operand2, result));
+			float result = simpleCalculatorService.subtract(Float.parseFloat(leftOperand), Float.parseFloat(rightOperand));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.SUBTRACTION_RESULT, leftOperand, rightOperand, result));
 		}
 		
 		return response;
@@ -118,11 +153,11 @@ public class ComputationController {
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("multiply")
-	public Response multiplyNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
-		Response response = validateOperand(operand1, operand2);
+	public Response multiplyNumbers(@QueryParam("leftOperand") String leftOperand, @QueryParam("rightOperand") String rightOperand) {
+		Response response = validateOperand(leftOperand, rightOperand);
 		if(response == null) {
-			int result = simpleCalculatorService.multiply(Integer.parseInt(operand1), Integer.parseInt(operand2));
-			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.MULTIPLY_RESULT, operand1, operand2, result));
+			float result = simpleCalculatorService.multiply(Float.parseFloat(leftOperand), Float.parseFloat(rightOperand));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.MULTIPLY_RESULT, leftOperand, rightOperand, result));
 		}
 		
 		return response;
@@ -135,16 +170,17 @@ public class ComputationController {
 	 */
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
-	@Path("division")
-	public Response divisionNumbers(@QueryParam("operand1") String operand1, @QueryParam("operand2") String operand2) {
-		Response response = validateOperand(operand1, operand2);
+	@Path("divide")
+	public Response divisionNumbers(@QueryParam("leftOperand") String leftOperand, @QueryParam("rightOperand") String rightOperand) {
+		Response response = validateOperand(leftOperand, rightOperand);
 		if(response == null) {
-			int result = simpleCalculatorService.divison(Integer.parseInt(operand1), Integer.parseInt(operand2));
-			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.DIVISION_RESULT, operand1, operand2, result));
+			float result = simpleCalculatorService.divison(Float.parseFloat(leftOperand), Float.parseFloat(rightOperand));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.DIVISION_RESULT, leftOperand, rightOperand, result));
 		}
 		
 		return response;
 	}
+
 	
 	/**
 	 * A default GET method to check that server is up and REST service is working.
@@ -169,16 +205,29 @@ public class ComputationController {
 		return Response.status(statusCode).entity(resultWrapper).build();
 	}
 	
-	private Response validateOperand(String operand1, String operand2) {
-		if(!InputValidator.validIntegerValue(operand1)) {
-			return createResponse(VALIDATION_FAILURE, "Operand1 is missing or invlaid integer value.");
+	private Response validateOperand(String leftOperand, String rightOperand) {
+		if(!InputValidator.validFloatValue(leftOperand)) {
+			return createResponse(VALIDATION_FAILURE, "Left operand is missing or invlaid float value.");
 		}
 		
-		if(!InputValidator.validIntegerValue(operand2)) {
-			return createResponse(VALIDATION_FAILURE, "Operand2 is missing or invlaid integer value.");
+		if(!InputValidator.validFloatValue(rightOperand)) {
+			return createResponse(VALIDATION_FAILURE, "Right operand is missing or invlaid float value.");
 		}
 		
 		return null;
 	}
 
+	private Response validateAverageParameter(String type, String valueSet) {
+		if(InputValidator.isEmptyString(type)) {
+			return createResponse(VALIDATION_FAILURE, "Average type is missing.");
+		}
+		if(InputValidator.isEmptyString(valueSet)) {
+			return createResponse(VALIDATION_FAILURE, "Value set is missing.");
+		}
+		if(!InputValidator.isValidValueSet(valueSet)) {
+			return createResponse(VALIDATION_FAILURE, "Invalid value set.");
+		}
+		
+		return null;
+	}
 }
