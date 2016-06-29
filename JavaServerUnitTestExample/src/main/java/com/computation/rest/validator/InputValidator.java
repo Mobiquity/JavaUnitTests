@@ -49,7 +49,7 @@ public class InputValidator {
 		}
 		String[] values = valueSet.substring(1, valueSet.length()-1).split(",");
 		for (String floatValue : values) {
-			if(!validFloatValue(floatValue)){
+			if(!validFloatValue(floatValue.trim())){
 				return false;
 			}
 		}
