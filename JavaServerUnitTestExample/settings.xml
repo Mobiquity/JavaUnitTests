@@ -1,0 +1,68 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd ">
+     
+     <servers>
+	   <server>
+             <id>Mobiquity</id>
+             <username>dtg-kv2</username>
+             <password>DTG-KV2-473624540346544</password>
+	   </server>
+         <server>
+             <id>mobiquity</id>
+             <username>dtg-kv2</username>
+             <password>DTG-KV2-473624540346544</password>
+         </server>
+	   <server>
+             <id>xaton-group</id>
+             <username>dtg-kv2</username>
+             <password>DTG-KV2-473624540346544</password>
+         </server>
+         <server>
+             <id>xaton-snapshot</id>
+             <username>dtg-kv2</username>
+             <password>DTG-KV2-473624540346544</password>
+         </server>
+     </servers>
+     
+     <mirrors>
+         <mirror>
+             <id>xaton-group</id>
+             <mirrorOf>*</mirrorOf>
+             <url>http://nexus.mobiquityinc.com/nexus/content/repositories/xaton-group</url>
+         </mirror>
+     </mirrors>
+   
+    <activeProfiles>
+         <activeProfile>xaton-group</activeProfile>
+     </activeProfiles>
+     
+     <profiles>
+         <profile>
+             <id>xaton-group</id>
+             <repositories>
+		      <repository>
+                     <id>Mobiquity</id>
+                     <url>http://nexus.mobiquityinc.com/nexus/content/repositories/xaton-group</url>
+                     <releases><enabled>true</enabled></releases>
+                     <snapshots><enabled>true</enabled></snapshots>
+                 </repository>
+                 <repository>
+                     <id>mobiquity</id>
+                     <url>http://nexus.mobiquityinc.com/nexus/content/repositories/xaton-group</url>
+                     <releases><enabled>true</enabled></releases>
+                     <snapshots><enabled>true</enabled></snapshots>
+                 </repository>
+             </repositories>
+             <pluginRepositories>
+                 <pluginRepository>
+                     <id>xaton-group</id>
+                     <url>http://nexus.mobiquityinc.com/nexus/content/repositories/xaton-group</url>
+                     <releases><enabled>true</enabled></releases>
+                     <snapshots><enabled>true</enabled></snapshots>
+                 </pluginRepository>
+             </pluginRepositories>
+         </profile>
+     </profiles>
+     
+ </settings>
+

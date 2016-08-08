@@ -16,13 +16,13 @@
 		<wolfram.alpha.version>1.1</wolfram.alpha.version>
 		<junit.version>4.11</junit.version>
 		<httpclient.version>4.5.1</httpclient.version>
-		<junit.version>4.4</junit.version>
-		<mockito.all.version>1.9.5</mockito.all.version>
+		<junit.version>4.12</junit.version>
+		<mockito.all.version>2.0.2-beta</mockito.all.version>
 		<maven.war.plugin.version>2.1.1</maven.war.plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-		<spring.version>3.2.16.RELEASE</spring.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jersey-version>2.9</jersey-version>
+		<jersey-version>1.19.1</jersey-version>
 	</properties>
 
 	<dependencies>
@@ -35,12 +35,10 @@
 			<systemPath>${project.basedir}/lib/WolframAlpha-1.1.jar</systemPath>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.16</version>
+			<version>1.7.14</version>
 		</dependency>
 
 		<dependency>
@@ -56,6 +54,11 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+		    <groupId>javax.ws.rs</groupId>
+		    <artifactId>jsr311-api</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -71,32 +74,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- 
-	    <dependency>
-      		<groupId>com.sun.jersey.jersey-test-framework</groupId>
-      		<artifactId>jersey-test-framework-grizzly2</artifactId>
-      		<scope>test</scope>
-      		<version>1.19</version>
-    	</dependency>
-    	
-       <dependency>
-      		<groupId>com.sun.jersey.jersey-test-framework</groupId>
-      		<artifactId>jersey-test-framework-inmemory</artifactId>
-      		<scope>test</scope>
-      		<version>1.19</version>
-      </dependency>
- -->
- 
-		<!-- Jersey dependencies -->
-		
-<!-- Jersey -->
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.8</version>
-		</dependency>
-
-		<!-- Spring 3 dependencies -->
+			<!-- Spring 3 dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -126,12 +104,25 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		
+		<!-- Jersey -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.sun.jersey</groupId>
+		    <artifactId>jersey-bundle</artifactId>
+		    <version>${jersey-version}</version>
+		</dependency>
+ 
 		<!-- Jersey + Spring -->
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-spring</artifactId>
-			<version>1.8</version>
+			<version>${jersey-version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
