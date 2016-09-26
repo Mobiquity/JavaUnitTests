@@ -9,4 +9,6 @@ public interface SimpleCalculatorService {
 	float multiply(float operand1, float operand2);
 
 	float divison(float operand1, float operand2);
+
+	long square(int operand1);
 }

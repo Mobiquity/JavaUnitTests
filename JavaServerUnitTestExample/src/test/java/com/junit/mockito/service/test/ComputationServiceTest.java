@@ -25,6 +25,7 @@ import com.computation.rest.service.impl.ComputationServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class ComputationServiceTest {
 
+    public static final String NO_RESULT_FOUND_FOR_GIVEN_QUERY = "No result found for given query";
     /**
      * @Mock annotation - Allows shorthand mock creation. Minimizes repetitive mock creation code.
      */
@@ -193,7 +194,7 @@ public class ComputationServiceTest {
      */
     @Test(expected = ResultNotFoundException.class)
     public void testResultNotFoundException() {
-    	when(computationEngine.computeOperation("!@#$%^&*()!@#$%^&*()!@#$%^&*(")).thenThrow(new ResultNotFoundException("No result found for given query"));
+    	when(computationEngine.computeOperation("!@#$%^&*()!@#$%^&*()!@#$%^&*(")).thenThrow(new ResultNotFoundException(NO_RESULT_FOUND_FOR_GIVEN_QUERY));
         computationService.basicAirthmeticOperation("!@#$%^&*()!@#$%^&*()!@#$%^&*(");
     }
 
@@ -211,4 +212,33 @@ public class ComputationServiceTest {
     	
     }
 
+    @Test
+    public void testSquareOperation() {
+        when(computationEngine.computeOperation("square of 12")).thenReturn("144");
+        assertEquals(computationEngine.computeOperation("square of 12"), "144");
+    }
+
+    @Test
+    public void testSquareOperationWithNegativeOperand() {
+        when(computationEngine.computeOperation("square of -12")).thenReturn("144");
+        assertEquals(computationEngine.computeOperation("square of -12"), "144");
+    }
+
+    @Test(expected = ResultNotFoundException.class)
+    public void testSquareOperationWithAnAlphabetAsOperand() {
+        when(computationEngine.computeOperation("square of a")).thenThrow(new ResultNotFoundException(NO_RESULT_FOUND_FOR_GIVEN_QUERY));
+        computationEngine.computeOperation("square of a");
+    }
+
+    @Test(expected = ResultNotFoundException.class)
+    public void testSquareOperationWithSpecialCharacterAsOperand() {
+        when(computationEngine.computeOperation("square of @")).thenThrow(new ResultNotFoundException(NO_RESULT_FOUND_FOR_GIVEN_QUERY));
+        computationEngine.computeOperation("square of @");
+    }
+
+    @Test
+    public void testSquareOperationWithDecimalOperand() {
+        when(computationEngine.computeOperation("square of 1.2")).thenReturn("1.44");
+        assertEquals(computationEngine.computeOperation("square of 1.2"), "1.44");
+    }
 }

@@ -36,8 +36,13 @@ public class SimpleCalculatorServiceTest {
 	
 	private static final float FLOAT_VALUE_12 = 12.0f;
 	private static final float NEG_FLOAT_VALUE_12 = -12.0f;
-	
-	private static SimpleCalculatorService calculator;
+
+    private static final int INT_VALUE_1000 = 1000;
+    private static final int INT_VALUE_0 = 0;
+
+    private static final long LONG_VALUE_1000000 = 1000000L;
+
+    private static SimpleCalculatorService calculator;
 
 	@BeforeClass
 	public static void initCalculator() {
@@ -350,5 +355,17 @@ public class SimpleCalculatorServiceTest {
 	// float result = 10 - 3;
 	// assertTrue(result == 9);
 	// }
+
+	@Test
+    public void testSquareOperation() {
+	    long result = calculator.square(INT_VALUE_1000);
+        assertEquals(LONG_VALUE_1000000, result);
+    }
+
+    @Test
+    public void testSquareOperationWithZeroAsOperand() {
+        long result = calculator.square(INT_VALUE_0);
+        assertEquals(INT_VALUE_0, result);
+    }
 
 }
