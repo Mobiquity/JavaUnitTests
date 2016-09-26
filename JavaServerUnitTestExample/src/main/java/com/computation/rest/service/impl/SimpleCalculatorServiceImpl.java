@@ -31,4 +31,9 @@ public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 		return operand1 / operand2;
 	}
 
+	@Override
+	public long square(int operand1) {
+		return operand1 * operand1;
+	}
+
 }
