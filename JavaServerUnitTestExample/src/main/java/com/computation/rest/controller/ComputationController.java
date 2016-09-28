@@ -39,7 +39,7 @@ public class ComputationController {
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("arithmetic")
 	public Response evaluateArithmeticExpression( @QueryParam("input") String input) {
-		String result = computationService.basicAirthmeticOperation(input);
+		String result = computationService.basicArithmeticOperation(input);
 		return createResponse(SUCCESS_CODE, result);
 	}
 

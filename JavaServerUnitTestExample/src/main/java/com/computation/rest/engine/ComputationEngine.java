@@ -106,4 +106,8 @@ public class ComputationEngine {
         }
         throw new ResultNotFoundException("No result was found for input: " + input);
     }
+
+    public Double computeRadian(Double value) {
+        throw new UnsupportedOperationException();
+    }
 }
