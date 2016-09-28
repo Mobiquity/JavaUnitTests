@@ -1,12 +1,15 @@
 package com.junit.mockito.service.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.computation.rest.engine.ComputationEngine;
@@ -210,5 +213,41 @@ public class ComputationServiceTest {
     public void testAverageCalculation() {
     	
     }
+
+	@Test
+	public void testModuleCalculation() {
+		when(computationEngine.computeOperation("5 % 2")).thenReturn("1");
+		when(computationEngine.computeOperation("5 % 5")).thenReturn("0");
+		when(computationEngine.computeOperation("14 % 5")).thenReturn("4");
+
+		assertEquals("5 modulo 2 is equal to 1", computationService.computeModulo("5 % 2"), "1");
+		assertNotEquals("5 modulo 2 is not equal to 0", computationService.computeModulo("5 % 2"), "0");
+		assertNotEquals("5 modulo 2 is not equal to 2", computationService.computeModulo("5 % 2"), "2");
+		assertNotNull("5 modulo 2 is not null", computationService.computeModulo("5 % 2"));
+
+		assertEquals("5 modulo 5 is equal to 0", computationService.computeModulo("5 % 5"), "0");
+		assertNotEquals("5 modulo 5 is not equal to 1", computationService.computeModulo("5 % 5"), "1");
+		assertNotEquals("5 modulo 5 is not equal to 2", computationService.computeModulo("5 % 5"), "2");
+		assertNotNull("5 modulo 5 is not null", computationService.computeModulo("5 % 5"));
+
+		assertEquals("14 modulo 5 is equal to 4", computationService.computeModulo("14 % 5"), "4");
+		assertNotEquals("14 modulo 5 is not equal to 1", computationService.computeModulo("14 % 5"), "1");
+		assertNotEquals("14 modulo 5 is not equal to 3", computationService.computeModulo("14 % 5"), "3");
+		assertNotNull("14 modulo 5 is not null", computationService.computeModulo("14 % 5"));
+	}
+
+	@Test
+	public void testComputeAbsolute() {
+		when(computationEngine.computeAbsolute(Mockito.anyDouble())).then(answer -> {
+			final Object[] arguments = answer.getArguments();
+			return Math.abs(Double.parseDouble(arguments[0].toString()));
+		});
+
+		assertEquals("absolute of 12 is 12", computationService.computeAbsolute(12D), 12, 2);
+		assertEquals("absolute of -12 is 12", computationService.computeAbsolute(-12D), 12, 2);
+
+		assertNotEquals("absolute of -12 is not -12", computationService.computeAbsolute(-12D), -12, 2);
+		assertNotNull("absolute of -12 is not null", computationService.computeAbsolute(-12D));
+	}
 
 }

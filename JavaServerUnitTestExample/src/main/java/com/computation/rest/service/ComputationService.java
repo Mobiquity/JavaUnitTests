@@ -12,4 +12,8 @@ public interface ComputationService {
 	String average(String type, String valueSet);
 	
 	String complexCalculation(String query);
+
+	String computeModulo(String value);
+
+	Double computeAbsolute(Double value);
 }

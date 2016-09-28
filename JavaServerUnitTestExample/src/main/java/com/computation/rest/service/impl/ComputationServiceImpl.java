@@ -10,9 +10,9 @@ import com.computation.rest.service.ComputationService;
 public class ComputationServiceImpl implements ComputationService {
 
 	private static final String TO_BINARY = " to binary";
-	
+
 	private ComputationEngine computationEngine;
-	
+
 	@Autowired
 	public ComputationServiceImpl(ComputationEngine computationEngine) {
 		this.computationEngine = computationEngine;
@@ -32,12 +32,22 @@ public class ComputationServiceImpl implements ComputationService {
 	public String convertUnitAndMeasure(String experssion) {
 		return computationEngine.computeUnitConversion(experssion);
 	}
-	
+
 	public String average(String type, String valueSet) {
 		return computationEngine.computeOperation(type + " " + valueSet);
 	}
-	
+
 	public String complexCalculation(String query) {
 		return computationEngine.computeOperation(query);
+	}
+
+	@Override
+	public String computeModulo(String value) {
+		return computationEngine.computeOperation(value);
+	}
+
+	@Override
+	public Double computeAbsolute(Double value) {
+		return computationEngine.computeAbsolute(value);
 	}
 }
