@@ -344,6 +344,24 @@ public class SimpleCalculatorServiceTest {
 		calculator.divison(FLOAT_VALUE_10, FLOAT_VALUE_0);
 	}
 
+	@Test
+	public void testSquareRootOfPositiveNumber() {
+		double result = calculator.sqrt(25);
+		assertEquals(5, result, 0);
+	}
+  
+	@Test
+	public void testSquareRootOfNegativeNumber() {
+		double result = calculator.sqrt(-25);
+		assertEquals(Double.NaN, result, 0);
+	}
+  
+	@Test
+	public void testSquareRootOfDecimalNumber() {
+		double result = calculator.sqrt(0.16);
+		assertEquals(0.4, result, 0);
+	}
+	
 	// @Ignore
 	// @Test
 	// public void testSubtract() {

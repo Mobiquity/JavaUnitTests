@@ -31,4 +31,10 @@ public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 		return operand1 / operand2;
 	}
 
+	@Override
+	public Double sqrt(double operand) {
+		
+		return Math.sqrt(operand);
+	}
+
 }

@@ -9,4 +9,12 @@ public interface SimpleCalculatorService {
 	float multiply(float operand1, float operand2);
 
 	float divison(float operand1, float operand2);
+	   
+	/**
+	 * Return square root of given operand.
+	 * 
+	 * @param operand
+	 * @return square root of operand
+	 */
+	Double sqrt(double operand);
 }

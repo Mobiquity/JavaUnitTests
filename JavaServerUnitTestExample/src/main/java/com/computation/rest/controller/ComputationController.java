@@ -181,6 +181,18 @@ public class ComputationController {
 		return response;
 	}
 
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("sqrt")
+	public Response squareRoot(@QueryParam("operand") String operand) {
+		Response response = validateSquareRootParameter(operand);
+		if (response == null) {
+			double result = simpleCalculatorService.sqrt(Double.parseDouble(operand));
+			response = createResponse(SUCCESS_CODE, String.format(
+					MessageConstants.SQRT_RESULT, operand, result));
+		}
+		return response;
+	}
 	
 	/**
 	 * A default GET method to check that server is up and REST service is working.
@@ -228,6 +240,22 @@ public class ComputationController {
 			return createResponse(VALIDATION_FAILURE, "Invalid value set.");
 		}
 		
+		return null;
+	}
+	
+	/**
+	 * Validate parameter for Square Root API
+	 * 
+	 * @param operand
+	 * @return Error Response if invalid operand, else null
+	 */
+	private Response validateSquareRootParameter(String operand) {
+
+		// Float value is using the generic regular expression which is also
+		// applicable to Double datatype
+		if (!InputValidator.validFloatValue(operand)) {
+			return createResponse(VALIDATION_FAILURE, "Invalid operand. Number is expected.");
+		}
 		return null;
 	}
 }

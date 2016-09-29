@@ -11,7 +11,8 @@
 		"b84d4584-cc60-ca50-75f6-78cc3be67836",
 		"479b704a-4cd8-4bcb-17ce-009710017a30",
 		"e209f87c-d693-69c1-4ec9-67405ed0b236",
-		"836797c1-9c11-bd80-5045-75078c4a072c"
+		"836797c1-9c11-bd80-5045-75078c4a072c",
+		"803d4d63-652b-797b-711b-61178801fd2c"
 	],
 	"folders": [],
 	"timestamp": 1456983196330,
@@ -194,6 +195,26 @@
 			"description": "",
 			"collectionId": "9efae186-91ba-9a57-6379-b5a6f57f488b",
 			"responses": []
+		},
+		{
+			"id": "803d4d63-652b-797b-711b-61178801fd2c",
+			"headers": "",
+			"url": "http://localhost:8080/java_server_unit_test_example/sqrt?operand=-0.25",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "9efae186-91ba-9a57-6379-b5a6f57f488b",
+			"data": null,
+			"dataMode": "params",
+			"name": "SquareRoot",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1475151663205,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
 		}
 	]
 }

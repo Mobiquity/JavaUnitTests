@@ -10,4 +10,5 @@ public class MessageConstants {
 	
 	public static final String DIVISION_RESULT = "Division of %s, %s is %s";
 	
+	public static final String SQRT_RESULT = "Square Root of %s is %s";
 }
