@@ -28,11 +28,11 @@ public class ComputationServiceTest {
     /**
      * @Mock annotation - Allows shorthand mock creation. Minimizes repetitive mock creation code.
      */
-    @Mock 
+    @Mock
     private ComputationEngine computationEngine;
 
     private ComputationService computationService;
-    
+
     /**
      * Invoke this method before a test case method execute.
      */
@@ -48,7 +48,7 @@ public class ComputationServiceTest {
     public void testBasicArithmeticOperation() {
     	when(computationEngine.computeOperation("2+22")).thenReturn("24");
     	when(computationEngine.computeOperation("2*2")).thenReturn("4");
-    	
+
         assertEquals(computationService.basicAirthmeticOperation("2*2"), "4");
         assertEquals(computationService.basicAirthmeticOperation("2+22"), "24");
     }
@@ -64,7 +64,7 @@ public class ComputationServiceTest {
 
     /**
      * Test add operation for one negative number and positive number.
-     * The negative number is greater and positive number value. 
+     * The negative number is greater and positive number value.
      */
     @Test
     public void testAddPositiveNumberToGreaterNegativeNumber() {
@@ -98,70 +98,70 @@ public class ComputationServiceTest {
     	when(computationEngine.computeOperation("22 + 0")).thenReturn("22");
         assertEquals(computationService.basicAirthmeticOperation("22 + 0"), "22");
     }
-    
+
     /**
-     *  Test subtract smaller number from greater number. 
+     *  Test subtract smaller number from greater number.
      */
     @Test
     public void testSubstractFromGreaterNumber() {
     	when(computationEngine.computeOperation("22 - 2")).thenReturn("20");
         assertEquals(computationService.basicAirthmeticOperation("22 - 2"), "20");
     }
-    
+
     /**
-     *  Test subtract smaller number from greater number. 
+     *  Test subtract smaller number from greater number.
      */
     @Test
     public void testSubstractNegativeNumberFromPositiveNumber() {
     	when(computationEngine.computeOperation("22 - (-2)")).thenReturn("24");
         assertEquals(computationService.basicAirthmeticOperation("22 - (-2)"), "24");
     }
-    
+
     /**
-     *  Test subtract zero from positive number. 
+     *  Test subtract zero from positive number.
      */
     @Test
     public void testSubstractZeroFromPositiveNumber() {
     	when(computationEngine.computeOperation("22 - 0")).thenReturn("22");
         assertEquals(computationService.basicAirthmeticOperation("22 - 0"), "22");
     }
-    
+
     /**
-     *  Test subtract negative number from zero. 
+     *  Test subtract negative number from zero.
      */
     @Test
     public void testSubstractPositiveNumberFromZero() {
     	when(computationEngine.computeOperation("0 - 22")).thenReturn("-22");
         assertEquals(computationService.basicAirthmeticOperation("0 - 22"), "-22");
     }
-    
+
     /**
-     *  Test multiply two negative numbers 
+     *  Test multiply two negative numbers
      */
    @Test
     public void testMultiplyWithTwoNegativeNumber() {
     	when(computationEngine.computeOperation("-2*-2")).thenReturn("4");
         assertEquals(computationService.basicAirthmeticOperation("-2*-2"), "4");
     }
-    
+
    /**
-    *  Test multiply negative number and positive number 
+    *  Test multiply negative number and positive number
     */
    @Test
     public void testMultiplyNegativeAndPositiveNumber() {
     	when(computationEngine.computeOperation("-2*2")).thenReturn("-4");
         assertEquals(computationService.basicAirthmeticOperation("-2*2"), "-4");
     }
-    
+
    /**
-    *  Test multiply positive number with zero 
+    *  Test multiply positive number with zero
     */
     @Test
     public void testMultiplyWithZero() {
     	when(computationEngine.computeOperation("2*0")).thenReturn("0");
         assertEquals(computationService.basicAirthmeticOperation("2*0"), "0");
     }
-    
+
     /**
      * Test converting numeric value to binary.
      */
@@ -170,7 +170,7 @@ public class ComputationServiceTest {
     	when(computationEngine.computeOperation("219 to binary")).thenReturn("11011011_2");
         when(computationEngine.computeOperation("4242 to binary")).thenReturn("1000010010010_2");
         when(computationEngine.computeOperation("-219 to binary")).thenReturn("-11011011_2");
-         
+
         assertEquals(computationService.convertDecimalToBinary("219"), "11011011_2");
         assertEquals(computationService.convertDecimalToBinary("-219"), "-11011011_2");
         assertEquals(computationService.convertDecimalToBinary("4242"), "1000010010010_2");
@@ -183,13 +183,13 @@ public class ComputationServiceTest {
     public void testConvertUnitAndMeasure() {
         when(computationEngine.computeUnitConversion("120 kilometers to meters")).thenReturn("120000 meters");
         when(computationEngine.computeUnitConversion("160 kilometers to miles")).thenReturn("99.42 miles");
-        
+
         assertEquals(computationService.convertUnitAndMeasure("120 kilometers to meters"), "120000 meters");
         assertEquals(computationService.convertUnitAndMeasure("160 kilometers to miles"), "99.42 miles");
     }
 
     /**
-     * Test exception condition when passing invalid data type value. 
+     * Test exception condition when passing invalid data type value.
      */
     @Test(expected = ResultNotFoundException.class)
     public void testResultNotFoundException() {
@@ -205,10 +205,16 @@ public class ComputationServiceTest {
     	when(computationEngine.computeUnitConversion("convert 1024 megabytes to miles")).thenReturn(" MB  (megabytes) and  miles are not compatible.");
         assertEquals(computationService.convertUnitAndMeasure("convert 1024 megabytes to miles"), " MB  (megabytes) and  miles are not compatible.");
     }
-    
+
     @Test
     public void testAverageCalculation() {
-    	
+    	when(computationEngine.computeOperation("mean {10 20 30}")).thenReturn("20");
+        assertEquals(computationService.average("mean", "{10 20 30}"), "20");
     }
 
+    @Test
+    public void testComplexCalculation() {
+        when(computationEngine.computeOperation("square 10")).thenReturn("100");
+        assertEquals("100", computationService.complexCalculation("square 10"));
+    }
 }
