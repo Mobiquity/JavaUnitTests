@@ -12,4 +12,12 @@ public interface ComputationService {
 	String average(String type, String valueSet);
 	
 	String complexCalculation(String query);
+
+	/**
+	 * Return square root of given operand.
+	 * 
+	 * @param operand
+	 * @return square root of operand
+	 */
+	Double sqrt(double operand);
 }

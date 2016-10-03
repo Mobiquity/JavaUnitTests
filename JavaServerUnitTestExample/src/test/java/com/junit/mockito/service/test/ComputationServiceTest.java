@@ -207,6 +207,18 @@ public class ComputationServiceTest {
     }
     
     @Test
+    public void testSquareRoot() {
+    	when(computationEngine.sqrt(81)).thenReturn(9.0);
+        assertEquals(computationService.sqrt(81), 9, 0);
+    }
+    
+    @Test
+    public void testCube() {
+    	when(computationEngine.computeOperation("cube of 2")).thenReturn("8");
+        assertEquals(computationService.complexCalculation("cube of 2"), "8");
+    }
+    
+    @Test
     public void testAverageCalculation() {
     	
     }

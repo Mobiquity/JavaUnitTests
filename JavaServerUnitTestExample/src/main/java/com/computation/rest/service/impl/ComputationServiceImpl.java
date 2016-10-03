@@ -40,4 +40,10 @@ public class ComputationServiceImpl implements ComputationService {
 	public String complexCalculation(String query) {
 		return computationEngine.computeOperation(query);
 	}
+
+	@Override
+	public Double sqrt(double operand) {
+		
+		return computationEngine.sqrt(operand);
+	}
 }
