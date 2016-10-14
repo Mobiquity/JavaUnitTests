@@ -10,6 +10,6 @@ public class MessageConstants {
 	
 	public static final String DIVISION_RESULT = "Division of %s, %s is %s";
 
-	public static final String FAHRENHEIT_RESULT = "Degree celsius of %s f is %s";
+	public static final String FAHRENHEIT_RESULT = "%s°F is %s°C";
 	
 }

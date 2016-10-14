@@ -189,9 +189,10 @@ public class ComputationController {
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("convertFahrenheit")
-	public Response convertFahrenheit(@QueryParam("degree") String operand) {
+	public Response convertFahrenheit(@QueryParam("fahrenheit") String operand) {
 		Response response = validateOperand(operand);
 		if(response == null) {
+			String string = computationService.convertFahrenheitToDegree(Float.parseFloat(operand));
 			float degrees = simpleCalculatorService.convertFahrenheit(Float.parseFloat(operand));
 			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.FAHRENHEIT_RESULT, operand, degrees));
 		}

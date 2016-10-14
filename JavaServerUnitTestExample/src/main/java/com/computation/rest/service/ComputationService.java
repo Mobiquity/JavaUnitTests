@@ -12,4 +12,6 @@ public interface ComputationService {
 	String average(String type, String valueSet);
 	
 	String complexCalculation(String query);
+
+	String convertFahrenheitToDegree(float fahrenheit);
 }

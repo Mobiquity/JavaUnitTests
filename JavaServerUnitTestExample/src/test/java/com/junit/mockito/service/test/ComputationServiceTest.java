@@ -1,18 +1,17 @@
 package com.junit.mockito.service.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
+import com.computation.rest.engine.ComputationEngine;
+import com.computation.rest.exception.mapper.ResultNotFoundException;
+import com.computation.rest.service.ComputationService;
+import com.computation.rest.service.impl.ComputationServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.computation.rest.engine.ComputationEngine;
-import com.computation.rest.exception.mapper.ResultNotFoundException;
-import com.computation.rest.service.ComputationService;
-import com.computation.rest.service.impl.ComputationServiceImpl;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * This class demonstrate how to use Mockito framework and write unit testcase for a service layer.
@@ -211,4 +210,9 @@ public class ComputationServiceTest {
     	
     }
 
+    @Test
+    public void testConvertFahrenheitToDegree() {
+        when(computationEngine.computeUnitConversion("1.0 fahrenheit to celsius")).thenReturn("-17.22 °C");
+        assertEquals(computationService.convertFahrenheitToDegree(1), "-17.22 °C");
+    }
 }

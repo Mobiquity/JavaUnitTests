@@ -198,7 +198,7 @@
 		{
             "id": "bdf1631d-5464-5d53-045a-577270e5f130",
             "headers": "Content-Type: application/json\nAccept: application/json\n",
-            "url": "http://localhost:8080/java_server_unit_test_example/convertFahrenheit?degree=1",
+            "url": "http://localhost:8080/java_server_unit_test_example/convertFahrenheit?fahrenheit=1",
             "preRequestScript": "",
             "pathVariables": {},
             "method": "GET",
