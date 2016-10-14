@@ -194,6 +194,25 @@
 			"description": "",
 			"collectionId": "9efae186-91ba-9a57-6379-b5a6f57f488b",
 			"responses": []
-		}
+		},
+		{
+            "id": "bdf1631d-5464-5d53-045a-577270e5f130",
+            "headers": "Content-Type: application/json\nAccept: application/json\n",
+            "url": "http://localhost:8080/java_server_unit_test_example/convertFahrenheit?fahrenheit=1",
+            "preRequestScript": "",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "currentHelper": "normal",
+            "helperAttributes": {},
+            "time": 1476440775841,
+            "name": "Fahrenheit to Degrees",
+            "description": "",
+            "collectionId": "9efae186-91ba-9a57-6379-b5a6f57f488b",
+            "responses": []
+         }
 	]
 }

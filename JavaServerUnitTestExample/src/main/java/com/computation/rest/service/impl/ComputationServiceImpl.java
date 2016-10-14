@@ -1,10 +1,9 @@
 package com.computation.rest.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.computation.rest.engine.ComputationEngine;
 import com.computation.rest.service.ComputationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ComputationServiceImpl implements ComputationService {
@@ -39,5 +38,11 @@ public class ComputationServiceImpl implements ComputationService {
 	
 	public String complexCalculation(String query) {
 		return computationEngine.computeOperation(query);
+	}
+
+	@Override
+	public String convertFahrenheitToDegree(final float fahrenheit) {
+
+		return computationEngine.computeUnitConversion(fahrenheit + " fahrenheit to celsius");
 	}
 }

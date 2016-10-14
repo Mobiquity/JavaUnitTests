@@ -1,12 +1,11 @@
 package com.junit.mockito.service.test;
 
-import static org.junit.Assert.assertEquals;
-
+import com.computation.rest.service.SimpleCalculatorService;
+import com.computation.rest.service.impl.SimpleCalculatorServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.computation.rest.service.SimpleCalculatorService;
-import com.computation.rest.service.impl.SimpleCalculatorServiceImpl;
+import static org.junit.Assert.assertEquals;
 
 public class SimpleCalculatorServiceTest {
 
@@ -344,11 +343,12 @@ public class SimpleCalculatorServiceTest {
 		calculator.divison(FLOAT_VALUE_10, FLOAT_VALUE_0);
 	}
 
-	// @Ignore
-	// @Test
-	// public void testSubtract() {
-	// float result = 10 - 3;
-	// assertTrue(result == 9);
-	// }
+
+	@Test
+	public void testFahrenheitOfPositiveNumber() {
+		float result = calculator.convertFahrenheit(1);
+
+		assertEquals(-17.0, Math.round(result), 0);
+	}
 
 }
