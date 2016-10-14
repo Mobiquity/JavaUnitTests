@@ -1,8 +1,7 @@
 package com.computation.rest.service.impl;
 
-import org.springframework.stereotype.Service;
-
 import com.computation.rest.service.SimpleCalculatorService;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
@@ -31,4 +30,10 @@ public class SimpleCalculatorServiceImpl implements SimpleCalculatorService {
 		return operand1 / operand2;
 	}
 
+	@Override
+	public float convertFahrenheit(final float fahrenheit) {
+		//formula to convert fahrenheit to degrees
+		//T(°C) = (T(°F) - 32) × 5/9
+		return ((subtract(fahrenheit, 32)) * divison(5, 9));
+	}
 }

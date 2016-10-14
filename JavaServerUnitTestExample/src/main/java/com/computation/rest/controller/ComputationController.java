@@ -1,20 +1,19 @@
 package com.computation.rest.controller;
 
+import com.computation.rest.constants.MessageConstants;
+import com.computation.rest.service.ComputationService;
+import com.computation.rest.service.SimpleCalculatorService;
+import com.computation.rest.validator.InputValidator;
+import com.computation.rest.wrapper.ResultWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.computation.rest.constants.MessageConstants;
-import com.computation.rest.service.ComputationService;
-import com.computation.rest.service.SimpleCalculatorService;
-import com.computation.rest.validator.InputValidator;
-import com.computation.rest.wrapper.ResultWrapper;
 
 @Path("/")
 @Component("computationController")
@@ -181,6 +180,24 @@ public class ComputationController {
 		return response;
 	}
 
+	/**
+	 * This rest API converts temperature unit Fahrenheit to Degree celsius.
+	 *
+	 * @param operand
+	 * @return
+	 */
+	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Path("convertFahrenheit")
+	public Response convertFahrenheit(@QueryParam("degree") String operand) {
+		Response response = validateOperand(operand);
+		if(response == null) {
+			float degrees = simpleCalculatorService.convertFahrenheit(Float.parseFloat(operand));
+			response = createResponse(SUCCESS_CODE, String.format(MessageConstants.FAHRENHEIT_RESULT, operand, degrees));
+		}
+
+		return response;
+	}
 	
 	/**
 	 * A default GET method to check that server is up and REST service is working.
@@ -207,13 +224,21 @@ public class ComputationController {
 	
 	private Response validateOperand(String leftOperand, String rightOperand) {
 		if(!InputValidator.validFloatValue(leftOperand)) {
-			return createResponse(VALIDATION_FAILURE, "Left operand is missing or invlaid float value.");
+			return createResponse(VALIDATION_FAILURE, "Left operand is missing or invalid float value.");
 		}
 		
 		if(!InputValidator.validFloatValue(rightOperand)) {
-			return createResponse(VALIDATION_FAILURE, "Right operand is missing or invlaid float value.");
+			return createResponse(VALIDATION_FAILURE, "Right operand is missing or invalid float value.");
 		}
 		
+		return null;
+	}
+
+	private Response validateOperand(String operand) {
+		if(!InputValidator.validFloatValue(operand)) {
+			return createResponse(VALIDATION_FAILURE, "operand is missing or invalid float value.");
+		}
+
 		return null;
 	}
 
